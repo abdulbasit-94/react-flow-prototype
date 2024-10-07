@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { Handle, NodeProps, Position, useReactFlow } from '@xyflow/react';
 import RangeInput from '../RangeInput';
 import { Config } from '../ConfigNode/types';
+import SelectBox from '../SelectBox';
 
 // const allowedValues = [256, 512, 2048, 4096];
 
-const allowedValues = [256, 512, 2048, 4096]; // Predefined allowed values
+const TEXTURE_MAX_SIZES = [256, 512, 2048, 4096]; // Predefined allowed values
 
 function TextureNode(props: NodeProps) {
     const { id, dragging } = props;
     const { updateNodeData, getNodes, setNodes } = useReactFlow();
-    const [selectedValue, setSelectedValue] = useState<number>(allowedValues[0]);
+    const [selectedValue, setSelectedValue] = useState<number>(TEXTURE_MAX_SIZES[0]);
 
     useEffect(() => {
         updateValue(selectedValue.toString()); // Convert number to string
@@ -65,7 +66,9 @@ function TextureNode(props: NodeProps) {
     return (
         <div className={`${dragging ? 'dragging' : ''}`}>
             <Handle type="source" position={Position.Top} className="drag-handle" />
-            <RangeInput selectedValue={selectedValue} setSelectedValue={setSelectedValue} allowedValues={allowedValues} handleDelete={() => handleDelete(id)} title="Max Size" isDisabled={true} />
+            {/* <RangeInput selectedValue={selectedValue} setSelectedValue={setSelectedValue} allowedValues={allowedValues} handleDelete={() => handleDelete(id)} title="Max Size" isDisabled={true} /> */}
+            {/* <p>Max Size:</p> */}
+            <SelectBox selectedValue={selectedValue} options={TEXTURE_MAX_SIZES} onChange={setSelectedValue} handleDelete={() => handleDelete(id)} title="Max Size"  />
         </div>
     );
 };
