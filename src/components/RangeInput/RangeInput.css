@@ -5,7 +5,7 @@
 .range-container {
   max-width: 400px;
   /* padding: 10px; */
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   border-radius: 15px;
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   text-align: center;
@@ -23,7 +23,7 @@
 }
 
 .range-label {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .range-slider {
@@ -35,7 +35,7 @@
 
 .range-value {
   font-size: 18px;
-  font-weight: bold;
+  font-weight: normal;
   color: #333;
   margin: 5px 14px 0;
 }

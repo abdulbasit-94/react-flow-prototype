@@ -28,7 +28,7 @@ export const initialNodes: Node[] = [
                 }
             }
         },
-        position: { x: 0, y: -100 },
+        position: { x: -50, y: -70 },
         type: 'configNode'
     },
     {
@@ -74,7 +74,8 @@ export const initialEdges: Edge[] = [
         id: 'config-add_scene_btn_id',
         source: 'config',
         target: 'add_scene_btn_id',
-        animated: true
+        animated: true,
+        
     },
     {
         id: 'config-add_node_btn_id',

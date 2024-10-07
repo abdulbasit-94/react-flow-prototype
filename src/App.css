@@ -56,7 +56,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-
+    cursor: pointer !important;
 }
 
 .close-btn img {
@@ -82,4 +82,12 @@
     font-weight: 600;
     font-size: .75rem;
     line-height: 1rem;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.react-flow__handle {
+    background-color: #dcdcdc !important;
 }

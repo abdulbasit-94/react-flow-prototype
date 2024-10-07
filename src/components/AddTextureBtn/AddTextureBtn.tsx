@@ -14,7 +14,7 @@ function AddTextureBtn({ id }: NodeProps) {
                     id: newNodeId,
                     data: {}, // Pass initial empty data
                     type: 'TextureNode',
-                    position: { x: -187, y: 500 },
+                    position: { x: -200, y: 500 },
                     parentNode: id,
                     dragHandle: '.drag-handle'
                 },

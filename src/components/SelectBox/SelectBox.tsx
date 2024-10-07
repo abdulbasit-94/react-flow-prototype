@@ -25,7 +25,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
         <button className='close-btn' onClick={handleDelete}><img src={CloseSvg} alt="cross" /></button>
       </div>
       <div className='select-box-parent drag-handle'>
-        <div className='styled-dropdown-box'>
+        <label className='styled-dropdown-box'>
           <select
             className="styled-dropdown"
             value={selectedValue}
@@ -37,7 +37,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
               </option>
             ))}
           </select>
-        </div>
+        </label>
       </div>
     </div>
   );

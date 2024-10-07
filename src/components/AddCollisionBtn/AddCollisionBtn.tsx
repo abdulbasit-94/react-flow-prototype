@@ -14,7 +14,7 @@ function AddCollisionBtn({ id }: NodeProps) {
                     id: newNodeId,
                     data: {}, // Pass initial empty data
                     type: 'CollisionNode',
-                    position: { x: 17, y: 570 },
+                    position: { x: 15, y: 570 },
                     parentNode: id,
                     dragHandle: '.drag-handle'
                 },
