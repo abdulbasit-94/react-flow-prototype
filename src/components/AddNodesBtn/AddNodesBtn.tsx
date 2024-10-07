@@ -1,9 +1,7 @@
-import { Handle, NodeProps, useReactFlow, Position, useHandleConnections, useNodesData } from '@xyflow/react';
-import { useEffect, useState } from 'react';
-// import './style.css';
-import { Node, Edge } from '@xyflow/react';
+import { Handle, NodeProps, useReactFlow, Position } from '@xyflow/react';
+import { Edge } from '@xyflow/react';
 
-function AddNodesBtn({ data, id }: NodeProps) {
+function AddNodesBtn({ id }: NodeProps) {
     const { setNodes, setEdges, getNodes } = useReactFlow();
 
     const handleAddNode = () => {

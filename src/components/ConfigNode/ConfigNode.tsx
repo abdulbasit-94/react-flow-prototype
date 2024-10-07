@@ -12,23 +12,10 @@
 // export default ConfigNode;
 
 // import { useCallback } from 'react';
-import { Handle, NodeProps, Position, useHandleConnections, useNodesData } from '@xyflow/react'; // Import NodeProps from ReactFlow
+import { Handle, NodeProps, Position } from '@xyflow/react'; // Import NodeProps from ReactFlow
 import "./style.css";
 
 function ConfigNode({ data: { configJson } }: NodeProps) {
-
-  const connections = useHandleConnections({
-        type: 'target',
-      });
-      const nodesData = useNodesData<unknown>(
-        connections.map((connection) => connection.target),
-      );
-      const nodesData2 = useNodesData<unknown>(
-        connections.map((connection) => connection.source),
-      );
-
-      console.log('nodesData => ', nodesData, nodesData2);
-
   return (
     <>
       <div className='config-node'>

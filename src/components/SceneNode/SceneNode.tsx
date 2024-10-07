@@ -1,12 +1,13 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, memo } from 'react';
 import { Handle, NodeProps, Position, useReactFlow } from '@xyflow/react'; // Import NodeProps from ReactFlow
 import './style.css'; // Ensure you include your styles
+import { Config } from '../ConfigNode/types';
 
 function SceneNode({ data, id }: NodeProps) {
     const { updateNodeData, getNodes, setNodes } = useReactFlow();
 
-    const [key, setKey] = useState(data.key || ''); // Initialize with data.key if available
-    const [value, setValue] = useState(data.value || ''); // Initialize with data.value if available
+    const [key, setKey] = useState<string>(typeof data.key === 'string' ? data.key : ''); // Initialize with data.key if available
+    const [value, setValue] = useState<string>(typeof data.value === 'string' ? data.value : ''); // Initialize with data.value if available
 
     const handleKeyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newKey = event.target.value;
@@ -24,29 +25,53 @@ function SceneNode({ data, id }: NodeProps) {
         const newValue = event.target.value;
         setValue(newValue);
 
-        // Update the node data immediately when the value changes
+        // Update node data immediately when the value changes
         if (key) {
             updateNodeData(id, { [key]: newValue }); // Use the existing key, update the value
         }
 
         const nodes = getNodes();
-        const configNode = nodes.filter(node => node.id === 'config')[0];
-        console.log('configNode => ', configNode)
-        const newSceneData = { ...configNode?.data?.configJson.scene, [key]: parseInt(newValue) };
-        console.log('newSceneData => ', newSceneData);
-        updateNodeData('config', { configJson: { ...configNode?.data?.configJson, scene: newSceneData } });
+        const configNode = nodes.find(node => node.id === 'config');
+
+        if (configNode && configNode.data?.configJson) {
+            const configJson = configNode.data.configJson as Config; // Assert the type of configJson
+            const newSceneData = {
+                ...(configJson.scene || {}), // Initialize with an empty object if scene is undefined
+                [key]: parseInt(newValue) // Safely assign the value
+            };
+
+            console.log('newSceneData => ', newSceneData);
+            updateNodeData('config', {
+                configJson: {
+                    ...configJson,
+                    scene: newSceneData // Update the scene data
+                }
+            });
+        }
     };
 
     const handleDelete = (nodeId: string) => {
+        setNodes(prevNodes => prevNodes.filter(node => node.id !== nodeId));
 
-        setNodes(prevNodes => prevNodes.filter(node => node.id !== nodeId))
         const nodes = getNodes();
-        const configNode = nodes.filter(node => node.id === 'config')[0];
-        const sceneData = { ...configNode?.data?.configJson.scene };
-        delete sceneData[key];
-        updateNodeData('config', { configJson: { ...configNode?.data?.configJson, scene: sceneData } });
+        const configNode = nodes.find(node => node.id === 'config');
 
-    }
+        if (configNode && configNode.data?.configJson) {
+            const configJson = configNode.data.configJson as Config; // Assert the type of configJson
+            const sceneData = { ...(configJson.scene || {}) }; // Initialize with an empty object if scene is undefined
+
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            delete sceneData[key]; // Safely delete the dynamic key
+
+            updateNodeData('config', {
+                configJson: {
+                    ...configJson,
+                    scene: sceneData // Update the scene data after deletion
+                }
+            });
+        }
+    };
 
     return (
         <div className='config-node'>

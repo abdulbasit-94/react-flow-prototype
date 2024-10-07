@@ -30,7 +30,7 @@ type Collision = {
 };
 
 // Final Config type
-type Config = {
+export type Config = {
     texture?: Texture;       // texture is optional
     scene?: Scene;           // scene is optional
     nodes?: Nodes;           // nodes is optional

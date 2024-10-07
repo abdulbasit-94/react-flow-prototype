@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Handle, Position, useEdges, useReactFlow } from '@xyflow/react';
+import { useEffect, useState } from 'react';
+import { Handle, NodeProps, Position, useReactFlow } from '@xyflow/react';
 import RangeInput from '../RangeInput';
 
-// const allowedValues = [256, 512, 2048, 4096];
 
-// const allowedValues = [256, 512, 2048, 4096]; // Predefined allowed values
-
-function CollisionNode({ data, id }: NodeProps) {
+function CollisionNode({ id }: NodeProps) {
     const { updateNodeData, getNodes, setNodes } = useReactFlow();
     const [selectedValue, setSelectedValue] = useState<number>(2048);
 
@@ -20,20 +17,46 @@ function CollisionNode({ data, id }: NodeProps) {
         }
     }, [selectedValue])
 
-    const updateValue = (newValue) => {
+    const updateConfigNode = (updateFn: (collisionData: unknown) => unknown) => {
+        // Get all nodes and find the config node only once
         const nodes = getNodes();
-        const configNode = nodes.filter(node => node.id === 'config')[0];
-        console.log('configNode => ', configNode)
-        const newGeometryData = { ...configNode?.data?.configJson.collision, max_polycount: parseInt(newValue) };
-        updateNodeData('config', { configJson: { ...configNode?.data?.configJson, collision: newGeometryData } });
-    } 
-
+        const configNode = nodes.find(node => node.id === 'config');
+    
+        if (!configNode) {
+            console.error('Config node not found!');
+            return;
+        }
+    
+        // Ensure configNode.data and configJson exist and are objects
+        const configJson = configNode.data?.configJson && typeof configNode.data.configJson === 'object' 
+            ? configNode.data.configJson 
+            : {};
+    
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        const newCollisionData = updateFn(configJson.collision || {});
+        
+        // Update the node data safely
+        const updatedConfigJson = {
+            ...configJson,
+            collision: newCollisionData
+        };
+    
+        updateNodeData('config', { configJson: updatedConfigJson });
+    };
+    
+    const updateValue = (newValue: number | string) => {
+        updateConfigNode((collisionData) => ({
+            ...collisionData as object,
+            max_polycount: parseInt(newValue as string) || 0 // Ensure valid number parsing
+        }));
+    };
+    
     const handleDelete = (nodeId: string) => {
-        setNodes(prevNodes => prevNodes.filter(node => node.id !== nodeId))
-        const nodes = getNodes();
-        const configNode = nodes.filter(node => node.id === 'config')[0];
-        updateNodeData('config', { configJson: { ...configNode?.data?.configJson, collision: {} } });
-    }
+        setNodes(prevNodes => prevNodes.filter(node => node.id !== nodeId));
+        
+        updateConfigNode(() => ({})); // Clears collision data entirely
+    };
 
     return (
         <div>

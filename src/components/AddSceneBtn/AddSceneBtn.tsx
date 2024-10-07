@@ -1,9 +1,7 @@
-import { Handle, NodeProps, useReactFlow, Position, useHandleConnections, useNodesData } from '@xyflow/react';
-import { useEffect, useState } from 'react';
-import './style.css';
-import { Node, Edge } from '@xyflow/react';
+import { Handle, NodeProps, useReactFlow, Position } from '@xyflow/react';
+import { Edge } from '@xyflow/react';
 
-function Controls({ data: { configJson }, id, onDataChange }: NodeProps & { onDataChange: (id: string, data: { key: string; value: string }) => void }) {
+function Controls({ id }: NodeProps & { onDataChange: (id: string, data: { key: string; value: string }) => void }) {
     // const [nodeCount, setNodeCount] = useState(1);
     
     const { setNodes, setEdges, getNodes } = useReactFlow();

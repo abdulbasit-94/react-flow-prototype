@@ -1,8 +1,7 @@
-import { Handle, NodeProps, useReactFlow, Position, useHandleConnections, useNodesData } from '@xyflow/react';
-import { useEffect, useState } from 'react';
+import { Handle, NodeProps, useReactFlow, Position } from '@xyflow/react';
 import { Edge } from '@xyflow/react';
 
-function AddGeometryBtn({ data, id }: NodeProps) {
+function AddGeometryBtn({ id }: NodeProps) {
     const { setNodes, setEdges, getNodes } = useReactFlow();
 
     const handleAddGeometry = () => {
@@ -32,7 +31,6 @@ function AddGeometryBtn({ data, id }: NodeProps) {
             ]);
         }
 
-        // setNodeCount(prev => prev + 1);
     };
 
 

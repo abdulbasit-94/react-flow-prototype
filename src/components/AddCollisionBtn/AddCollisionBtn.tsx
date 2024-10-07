@@ -1,8 +1,7 @@
-import { Handle, NodeProps, useReactFlow, Position, useHandleConnections, useNodesData } from '@xyflow/react';
-import { useEffect, useState } from 'react';
+import { Handle, NodeProps, useReactFlow, Position } from '@xyflow/react';
 import { Edge } from '@xyflow/react';
 
-function AddCollisionBtn({ data, id }: NodeProps) {
+function AddCollisionBtn({ id }: NodeProps) {
     const { setNodes, setEdges, getNodes } = useReactFlow();
 
     const handleAddCollision = () => {
