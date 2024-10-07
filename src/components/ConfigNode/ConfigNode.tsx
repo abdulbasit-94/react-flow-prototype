@@ -18,7 +18,7 @@ import "./style.css";
 function ConfigNode({ data: { configJson } }: NodeProps) {
   return (
     <>
-      <div className='config-node'>
+      <div className='config-node custom-node'>
         <label htmlFor="text">Config JSON:</label>
         <pre>{JSON.stringify(configJson, null, 2)}</pre> {/* Pretty print the JSON */}
         <Handle type="source" position={Position.Right} />

@@ -60,7 +60,7 @@ function CollisionNode(props: NodeProps) {
     };
 
     return (
-        <div className={`${dragging ? 'dragging' : ''}`}>
+        <div className={`custom-node ${dragging ? 'dragging' : ''}`}>
             <Handle type="target" position={Position.Top} />
             <RangeInput
                 selectedValue={selectedValue}

@@ -2,6 +2,7 @@ import React, { useState, memo } from 'react';
 import { Handle, NodeProps, Position, useReactFlow } from '@xyflow/react'; // Import NodeProps from ReactFlow
 import './style.css'; // Ensure you include your styles
 import { Config } from '../ConfigNode/types';
+import CloseSvg from '../../assets/close.svg';
 
 function SceneNode({ data, id }: NodeProps) {
     const { updateNodeData, getNodes, setNodes } = useReactFlow();
@@ -74,7 +75,7 @@ function SceneNode({ data, id }: NodeProps) {
     };
 
     return (
-        <div className='config-node'>
+        <div className='config-node custom-node'>
             <div className='input-group'>
                 <input
                     type='text'
@@ -91,7 +92,7 @@ function SceneNode({ data, id }: NodeProps) {
                     placeholder='Value'
                     disabled={!key} // Disable if the key is not filled
                 />
-                <button onClick={() => handleDelete(id)}>X</button>
+                <button className='close-btn' onClick={() => handleDelete(id)}><img src={CloseSvg} alt="cross" /></button>
             </div>
             <Handle type="target" position={Position.Left} />
         </div>

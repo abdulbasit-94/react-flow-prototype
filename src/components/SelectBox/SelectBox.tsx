@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import CloseSvg from '../../assets/close.svg';
 
 interface SelectBoxProps {
   options: number[]; // Array of options for the dropdown
@@ -21,20 +22,22 @@ const SelectBox: React.FC<SelectBoxProps> = ({
       {/* handleDelete={() => handleDelete(id)} title="Max Size"  */}
       <div className='select-box-header drag-handle'>
         <label className="select-box-label">{title}:&nbsp;</label>
-        <button onClick={handleDelete}>X</button>
+        <button className='close-btn' onClick={handleDelete}><img src={CloseSvg} alt="cross" /></button>
       </div>
-      <div className='styled-dropdown-box drag-handle'>
-        <select
-          className="styled-dropdown"
-          value={selectedValue}
-          onChange={(e) => onChange(Number(e.target.value))} // Update selected value
-        >
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+      <div className='select-box-parent drag-handle'>
+        <div className='styled-dropdown-box'>
+          <select
+            className="styled-dropdown"
+            value={selectedValue}
+            onChange={(e) => onChange(Number(e.target.value))} // Update selected value
+          >
+            {options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
     </div>
   );

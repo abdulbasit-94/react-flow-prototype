@@ -1,6 +1,7 @@
 import React from 'react';
 import { IRangeInput } from './type';
 import './RangeInput.css';
+import CloseSvg from '../../assets/close.svg';
 
 const RangeInput: React.FC<IRangeInput> = ({ 
   title,
@@ -27,7 +28,7 @@ const RangeInput: React.FC<IRangeInput> = ({
     <div className="range-container">
       <div className='range-container-header drag-handle'>
         <label htmlFor="range-slider" className="range-label">{title}:&nbsp;</label>
-        <button onClick={handleDelete}>X</button>
+        <button className='close-btn' onClick={handleDelete}><img src={CloseSvg} alt="cross" /></button>
       </div>
       
       {allowedValues && allowedValues.length > 0 ? (

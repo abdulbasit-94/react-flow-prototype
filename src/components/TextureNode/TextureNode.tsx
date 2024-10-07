@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Handle, NodeProps, Position, useReactFlow } from '@xyflow/react';
-import RangeInput from '../RangeInput';
 import { Config } from '../ConfigNode/types';
 import SelectBox from '../SelectBox';
 
@@ -64,7 +63,7 @@ function TextureNode(props: NodeProps) {
     };
 
     return (
-        <div className={`${dragging ? 'dragging' : ''}`}>
+        <div className={`custom-node ${dragging ? 'dragging' : ''}`}>
             <Handle type="source" position={Position.Top} className="drag-handle" />
             {/* <RangeInput selectedValue={selectedValue} setSelectedValue={setSelectedValue} allowedValues={allowedValues} handleDelete={() => handleDelete(id)} title="Max Size" isDisabled={true} /> */}
             {/* <p>Max Size:</p> */}
