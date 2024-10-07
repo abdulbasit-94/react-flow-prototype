@@ -3,7 +3,8 @@ import { Handle, NodeProps, Position, useReactFlow } from '@xyflow/react';
 import RangeInput from '../RangeInput';
 
 
-function CollisionNode({ id }: NodeProps) {
+function CollisionNode(props: NodeProps) {
+    const { id, dragging } = props;
     const { updateNodeData, getNodes, setNodes } = useReactFlow();
     const [selectedValue, setSelectedValue] = useState<number>(2048);
 
@@ -59,7 +60,7 @@ function CollisionNode({ id }: NodeProps) {
     };
 
     return (
-        <div>
+        <div className={`${dragging ? 'dragging' : ''}`}>
             <Handle type="target" position={Position.Top} />
             <RangeInput
                 selectedValue={selectedValue}
@@ -68,8 +69,7 @@ function CollisionNode({ id }: NodeProps) {
                 maxValue={4096}
                 step={100}
                 handleDelete={() => handleDelete(id)}
-                title="Max Polycount"
-            />
+                title="Max Polycount" />
         </div>
     );
 };

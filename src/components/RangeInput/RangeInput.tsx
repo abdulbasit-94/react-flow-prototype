@@ -25,7 +25,7 @@ const RangeInput: React.FC<IRangeInput> = ({
 
   return (
     <div className="range-container">
-      <div className='range-container-header'>
+      <div className='range-container-header drag-handle'>
         <label htmlFor="range-slider" className="range-label">{title}:&nbsp;</label>
         <button onClick={handleDelete}>X</button>
       </div>
@@ -54,7 +54,9 @@ const RangeInput: React.FC<IRangeInput> = ({
         />
       )}
 
-      <input type='number' className="range-value" onChange={handleChange} value={selectedValue} disabled={isDisabled} />
+      <div className='drag-handle range-input-wrapper'>
+        <input type='number' className="range-value" onChange={handleChange} value={selectedValue} disabled={isDisabled} />
+      </div>
     </div>
   );
 };

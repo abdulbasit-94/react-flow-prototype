@@ -3,7 +3,8 @@ import { Handle, NodeProps, Position, useReactFlow } from '@xyflow/react';
 import RangeInput from '../RangeInput';
 import { Config } from '../ConfigNode/types';
 
-function GeometryNode({ id }: NodeProps) {
+function GeometryNode(props: NodeProps) {
+    const { id, dragging } = props;
     const { updateNodeData, getNodes, setNodes } = useReactFlow();
     const [selectedValue, setSelectedValue] = useState<number>(500000);
 
@@ -67,7 +68,7 @@ function GeometryNode({ id }: NodeProps) {
     };
 
     return (
-        <div>
+        <div className={`custom-node ${dragging ? 'dragging' : ''}`}>
             <Handle type="target" position={Position.Top} />
             <RangeInput
                 selectedValue={selectedValue}

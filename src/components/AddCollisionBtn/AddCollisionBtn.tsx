@@ -16,6 +16,7 @@ function AddCollisionBtn({ id }: NodeProps) {
                     type: 'CollisionNode',
                     position: { x: 17, y: 570 },
                     parentNode: id,
+                    dragHandle: '.drag-handle'
                 },
             ]);
     

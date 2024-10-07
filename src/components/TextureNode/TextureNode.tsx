@@ -7,7 +7,8 @@ import { Config } from '../ConfigNode/types';
 
 const allowedValues = [256, 512, 2048, 4096]; // Predefined allowed values
 
-function TextureNode({ id }: NodeProps) {
+function TextureNode(props: NodeProps) {
+    const { id, dragging } = props;
     const { updateNodeData, getNodes, setNodes } = useReactFlow();
     const [selectedValue, setSelectedValue] = useState<number>(allowedValues[0]);
 
@@ -62,8 +63,8 @@ function TextureNode({ id }: NodeProps) {
     };
 
     return (
-        <div>
-            <Handle type="source" position={Position.Top} />
+        <div className={`${dragging ? 'dragging' : ''}`}>
+            <Handle type="source" position={Position.Top} className="drag-handle" />
             <RangeInput selectedValue={selectedValue} setSelectedValue={setSelectedValue} allowedValues={allowedValues} handleDelete={() => handleDelete(id)} title="Max Size" isDisabled={true} />
         </div>
     );

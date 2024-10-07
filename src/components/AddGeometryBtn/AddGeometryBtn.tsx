@@ -16,6 +16,7 @@ function AddGeometryBtn({ id }: NodeProps) {
                     type: 'GeometryNode',
                     position: { x: 220, y: 500 },
                     parentNode: id,
+                    dragHandle: '.drag-handle'
                 },
             ]);
     

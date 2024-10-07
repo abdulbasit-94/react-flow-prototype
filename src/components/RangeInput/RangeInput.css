@@ -4,7 +4,7 @@
   /* RangeInput.css */
 .range-container {
   max-width: 400px;
-  padding: 10px;
+  /* padding: 10px; */
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -15,7 +15,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  padding-bottom: 30px;
+  padding-top: 14px;
+  padding-left: 14px;
+  padding-right: 14px;
 }
 
 .range-label {
@@ -23,19 +26,25 @@
 }
 
 .range-slider {
-  width: 100%;
-  margin: 20px 0;
+  width: calc(100% - 28px);
   cursor: pointer;
+  margin: 0 14px;
+  box-sizing: border-box;
 }
 
 .range-value {
   font-size: 18px;
   font-weight: bold;
   color: #333;
+  margin: 5px 14px 0;
 }
 
 .range-container .range-value {
   width: 150px;
   display: block;
   text-align: center;
+}
+
+.range-container .range-input-wrapper {
+  padding-bottom: 14px;
 }
