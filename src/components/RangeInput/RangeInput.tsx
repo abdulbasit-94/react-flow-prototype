@@ -56,7 +56,7 @@ const RangeInput: React.FC<IRangeInput> = ({
       )}
 
       <div className='drag-handle range-input-wrapper'>
-        <input type='number' className="range-value" onChange={handleChange} value={selectedValue} disabled={isDisabled} />
+        <input type='number' max={maxValue} min={minValue} className="range-value" onChange={handleChange} value={selectedValue} disabled={isDisabled} />
       </div>
     </div>
   );

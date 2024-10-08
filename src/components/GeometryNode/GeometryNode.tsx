@@ -75,7 +75,7 @@ function GeometryNode(props: NodeProps) {
                 setSelectedValue={setSelectedValue}
                 minValue={0}
                 maxValue={1000000}
-                step={100}
+                // step={100}
                 handleDelete={() => handleDelete(id)}
                 title="Max Polycount"
             />
