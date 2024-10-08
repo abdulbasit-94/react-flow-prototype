@@ -8,8 +8,8 @@ const RangeInput: React.FC<IRangeInput> = ({
   selectedValue, 
   setSelectedValue, 
   allowedValues, 
-  minValue, 
-  maxValue, 
+  minValue = 0, 
+  maxValue = Infinity, 
   step, 
   handleDelete,
   isDisabled = false
@@ -20,7 +20,10 @@ const RangeInput: React.FC<IRangeInput> = ({
       const index = parseInt(event.target.value, 10);
       setSelectedValue(allowedValues[index]);
     } else {
-      setSelectedValue(parseInt(event.target.value));
+      const input = parseInt(event.target.value);
+      if(input <= maxValue && input >= minValue) {
+        setSelectedValue(parseInt(event.target.value));
+      }
     }
   };
 
